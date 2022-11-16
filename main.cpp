@@ -23,12 +23,44 @@
 #endif
 #include <stdlib.h>
 */
+GLint position = 80;
+GLint speed =   5;
+
+void aeroplaneMovement(int value) {
+
+   if(position < -80)
+        position = 80;
+
+    position -= speed;
+
+	glutPostRedisplay();
+
+
+
+	glutTimerFunc(100, aeroplaneMovement, 0);
+}
 
 void init() {
     glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 
 }
+void handleKeypress(unsigned char key, int x, int y) {
 
+	switch (key) {
+        case ' ':
+            speed = 0.0f;
+            break;
+
+        case '2':
+            speed = 1.0f;
+            break;
+
+        case '1':
+            speed = 0.2f;
+            break;
+        glutPostRedisplay();
+	}
+}
 void display() {
     glClear(GL_COLOR_BUFFER_BIT);
     glLoadIdentity();
@@ -57,6 +89,7 @@ void display() {
     glEnd();
 
 
+
     ///Missile
     glBegin(GL_POLYGON);
     glColor3f(0.5f, 0.5f, 0.5f);
@@ -74,6 +107,8 @@ void display() {
     glEnd();
 
 
+    glPushMatrix();
+    glTranslatef(position,0.0f, 0.0f);
     ///AeroPlane
     glBegin(GL_POLYGON);
     glColor3f(1.0f, 1.0f, 1.0f);
@@ -95,6 +130,8 @@ void display() {
     glVertex2f(25,25);
     glEnd();
     //Aeroplane -- wing
+
+    glPopMatrix();
 
     glFlush();
 
@@ -124,6 +161,7 @@ int main(int argc, char** argv) {
     glutReshapeFunc(reshape);
     init();
 
+    glutTimerFunc(100, aeroplaneMovement, 0);
     //glutKeyboardFunc(handleKeypress);
     //glutMouseFunc(handleMouse);
     //glutTimerFunc(100, update, 0);
