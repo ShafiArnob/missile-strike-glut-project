@@ -24,7 +24,7 @@
 #include <stdlib.h>
 */
 GLint position = 80;
-GLint speed =   5;
+GLint speed =   1;
 
 void aeroplaneMovement(int value) {
 
@@ -44,23 +44,25 @@ void init() {
     glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 
 }
+
 void handleKeypress(unsigned char key, int x, int y) {
 
 	switch (key) {
-        case ' ':
-            speed = 0.0f;
+        case '=':
+            speed += 2;
             break;
 
-        case '2':
-            speed = 1.0f;
+        case '-':
+            speed -= 2;
             break;
 
-        case '1':
-            speed = 0.2f;
+        case '0':
+            speed = 0;
             break;
         glutPostRedisplay();
 	}
 }
+
 void display() {
     glClear(GL_COLOR_BUFFER_BIT);
     glLoadIdentity();
@@ -162,7 +164,7 @@ int main(int argc, char** argv) {
     init();
 
     glutTimerFunc(100, aeroplaneMovement, 0);
-    //glutKeyboardFunc(handleKeypress);
+    glutKeyboardFunc(handleKeypress);
     //glutMouseFunc(handleMouse);
     //glutTimerFunc(100, update, 0);
     glutMainLoop();
