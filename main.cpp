@@ -26,6 +26,8 @@
 GLint position = 80;
 GLint speed =   1;
 
+GLint rocketX = 0;
+GLint rocketY = 0;
 void aeroplaneMovement(int value) {
 
    if(position < -80)
@@ -59,10 +61,32 @@ void handleKeypress(unsigned char key, int x, int y) {
         case '0':
             speed = 0;
             break;
+
+
         glutPostRedisplay();
 	}
 }
-
+void missileKeypress(int key, int x, int y){
+    switch(key){
+        //For Missile Control
+        case GLUT_KEY_UP:
+            rocketY+=2;
+            glutPostRedisplay();
+            break;
+        case GLUT_KEY_DOWN:
+            rocketY-=2;
+            glutPostRedisplay();
+            break;
+        case GLUT_KEY_LEFT:
+            rocketX-=2;
+            glutPostRedisplay();
+            break;
+        case GLUT_KEY_RIGHT:
+            rocketX+=2;
+            glutPostRedisplay();
+            break;
+    }
+}
 void display() {
     glClear(GL_COLOR_BUFFER_BIT);
     glLoadIdentity();
@@ -93,46 +117,48 @@ void display() {
 
 
     ///Missile
-    glBegin(GL_POLYGON);
-    glColor3f(0.5f, 0.5f, 0.5f);
-    glVertex2f(-50,-80);
-    glVertex2f(-50,-50);
-    glVertex2f(-55,-50);
-    glVertex2f(-55,-80);
-    glEnd();
-    //missile -- top
-    glBegin(GL_POLYGON);
-    glColor3f(1.0f, 0.0f, 0.0f);
-    glVertex2f(-50,-50);
-    glVertex2f(-52.5,-45);
-    glVertex2f(-55,-50);
-    glEnd();
+    glPushMatrix();
+    glTranslatef(rocketX,rocketY, 0.0f);
+        glBegin(GL_POLYGON);
+        glColor3f(0.5f, 0.5f, 0.5f);
+        glVertex2f(-50,-80);
+        glVertex2f(-50,-50);
+        glVertex2f(-55,-50);
+        glVertex2f(-55,-80);
+        glEnd();
+        //missile -- top
+        glBegin(GL_POLYGON);
+        glColor3f(1.0f, 0.0f, 0.0f);
+        glVertex2f(-50,-50);
+        glVertex2f(-52.5,-45);
+        glVertex2f(-55,-50);
+        glEnd();
+    glPopMatrix();
 
 
+    ///AeroPlane
     glPushMatrix();
     glTranslatef(position,0.0f, 0.0f);
-    ///AeroPlane
-    glBegin(GL_POLYGON);
-    glColor3f(1.0f, 1.0f, 1.0f);
-    glVertex2f(25,20);
-    glVertex2f(30,21);
-    glVertex2f(30,23);
-    glVertex2f(25,25);
+        glBegin(GL_POLYGON);
+        glColor3f(1.0f, 1.0f, 1.0f);
+        glVertex2f(25,20);
+        glVertex2f(30,21);
+        glVertex2f(30,23);
+        glVertex2f(25,25);
 
-    glVertex2f(5,25);
-    glVertex2f(1,22);
-    glVertex2f(5,20);
-    glEnd();
-    //Aeroplane -- rudder
-    glBegin(GL_POLYGON);
-    glColor3f(1.0f, 0.0f, 0.0f);
-    glVertex2f(30,22);
-    glVertex2f(33,30);
-    glVertex2f(30,30);
-    glVertex2f(25,25);
-    glEnd();
-    //Aeroplane -- wing
-
+        glVertex2f(5,25);
+        glVertex2f(1,22);
+        glVertex2f(5,20);
+        glEnd();
+        //Aeroplane -- rudder
+        glBegin(GL_POLYGON);
+        glColor3f(1.0f, 0.0f, 0.0f);
+        glVertex2f(30,22);
+        glVertex2f(33,30);
+        glVertex2f(30,30);
+        glVertex2f(25,25);
+        glEnd();
+        //Aeroplane -- wing
     glPopMatrix();
 
     glFlush();
@@ -165,6 +191,7 @@ int main(int argc, char** argv) {
 
     glutTimerFunc(100, aeroplaneMovement, 0);
     glutKeyboardFunc(handleKeypress);
+    glutSpecialFunc(missileKeypress);
     //glutMouseFunc(handleMouse);
     //glutTimerFunc(100, update, 0);
     glutMainLoop();
