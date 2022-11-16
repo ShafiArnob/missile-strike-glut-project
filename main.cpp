@@ -33,8 +33,9 @@ void display() {
     glClear(GL_COLOR_BUFFER_BIT);
     glLoadIdentity();
 
-    //Silo
+    ///Silo
     glBegin(GL_POLYGON);
+    glColor3f(1.0f, 1.0f, 1.0f);
     glVertex2f(-40,-80);
     glVertex2f(-40,-40);
     glVertex2f(-45,-40);
@@ -56,6 +57,21 @@ void display() {
     glEnd();
 
 
+    ///Missile
+    glBegin(GL_POLYGON);
+    glColor3f(0.5f, 0.5f, 0.5f);
+    glVertex2f(-50,-80);
+    glVertex2f(-50,-50);
+    glVertex2f(-55,-50);
+    glVertex2f(-55,-80);
+    glEnd();
+    //missile -- top
+    glBegin(GL_POLYGON);
+    glColor3f(1.0f, 0.0f, 0.0f);
+    glVertex2f(-50,-50);
+    glVertex2f(-52.5,-45);
+    glVertex2f(-55,-50);
+    glEnd();
 
     glFlush();
 
