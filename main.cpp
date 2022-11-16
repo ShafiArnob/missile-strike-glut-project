@@ -73,6 +73,29 @@ void display() {
     glVertex2f(-55,-50);
     glEnd();
 
+
+    ///AeroPlane
+    glBegin(GL_POLYGON);
+    glColor3f(1.0f, 1.0f, 1.0f);
+    glVertex2f(25,20);
+    glVertex2f(30,21);
+    glVertex2f(30,23);
+    glVertex2f(25,25);
+
+    glVertex2f(5,25);
+    glVertex2f(1,22);
+    glVertex2f(5,20);
+    glEnd();
+    //Aeroplane -- rudder
+    glBegin(GL_POLYGON);
+    glColor3f(1.0f, 0.0f, 0.0f);
+    glVertex2f(30,22);
+    glVertex2f(33,30);
+    glVertex2f(30,30);
+    glVertex2f(25,25);
+    glEnd();
+    //Aeroplane -- wing
+
     glFlush();
 
 }
