@@ -29,6 +29,8 @@ GLint speed =   1;
 GLint rocketX = 0;
 GLint rocketY = 0;
 float rocketAngle = 0;
+
+int siloAngle = 0;
 void aeroplaneMovement(int value) {
 
    if(position < -80)
@@ -44,7 +46,7 @@ void aeroplaneMovement(int value) {
 }
 
 void init() {
-    glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+    glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 
 }
 
@@ -73,6 +75,9 @@ void handleKeypress(unsigned char key, int x, int y) {
 
         case '-':
             speed -= 2;
+            break;
+        case 'l':
+            siloAngle = 90;
             break;
 
         //For Missile Control
@@ -130,6 +135,17 @@ void display() {
     glClear(GL_COLOR_BUFFER_BIT);
     glLoadIdentity();
 
+    ///Background
+    glBegin(GL_POLYGON);
+    glColor3f(0.5f, 1.0f, 1.0f);
+    glVertex2f(80,80);
+    glVertex2f(-80,80);
+    glVertex2f(-80,-80);
+    glVertex2f(80,-80);
+    glEnd();
+    //mountain
+
+
     ///Silo
     glBegin(GL_POLYGON);
     glColor3f(1.0f, 1.0f, 1.0f);
@@ -146,13 +162,16 @@ void display() {
     glVertex2f(-65,-80);
     glEnd();
     //Silo -- Top
+    glPushMatrix();
+    //glTranslatef(0.0f,0.0f, 0.0f);
+    glRotatef(siloAngle, 1.0f, 0.0f, 0.0f);
     glBegin(GL_POLYGON);
     glVertex2f(-40,-40);
     glVertex2f(-40,-35);
     glVertex2f(-65,-35);
     glVertex2f(-65,-40);
     glEnd();
-
+    glPopMatrix();
 
 
     ///Missile
