@@ -28,6 +28,7 @@ GLint speed =   1;
 
 GLint rocketX = 0;
 GLint rocketY = 0;
+float rocketAngle = 0;
 void aeroplaneMovement(int value) {
 
    if(position < -80)
@@ -47,8 +48,24 @@ void init() {
 
 }
 
-void handleKeypress(unsigned char key, int x, int y) {
+void handleMouse(int button, int state, int x, int y) {
+    GLfloat angle = 3.0f;
+	if (button == GLUT_LEFT_BUTTON){
+		if (state == GLUT_DOWN){
+			speed -= angle;
+		}
+	}
+	else if (button == GLUT_RIGHT_BUTTON){
+		if (state == GLUT_DOWN){
+			speed += angle;
+		}
+	}
 
+	glutPostRedisplay();
+}
+
+void handleKeypress(unsigned char key, int x, int y) {
+    int rocketSpeed = 3;
 	switch (key) {
         case '=':
             speed += 2;
@@ -58,11 +75,33 @@ void handleKeypress(unsigned char key, int x, int y) {
             speed -= 2;
             break;
 
+        //For Missile Control
+        case 'w':
+            rocketY+=rocketSpeed;
+            glutPostRedisplay();
+            break;
+        case 's':
+            rocketY-=rocketSpeed;
+            glutPostRedisplay();
+            break;
+        case 'a':
+            rocketX-=rocketSpeed;
+            glutPostRedisplay();
+            break;
+        case 'd':
+            rocketX+=rocketSpeed;
+            glutPostRedisplay();
+            break;
+
         case '0':
             speed = 0;
             break;
-
-
+        case 'q':
+            rocketAngle += 2;
+            break;
+        case 'e':
+            rocketAngle -= 2;
+            break;
         glutPostRedisplay();
 	}
 }
@@ -119,6 +158,7 @@ void display() {
     ///Missile
     glPushMatrix();
     glTranslatef(rocketX,rocketY, 0.0f);
+    glRotatef(rocketAngle, 0.0f, 0.0f, 1.0f);
         glBegin(GL_POLYGON);
         glColor3f(0.5f, 0.5f, 0.5f);
         glVertex2f(-50,-80);
@@ -192,7 +232,7 @@ int main(int argc, char** argv) {
     glutTimerFunc(100, aeroplaneMovement, 0);
     glutKeyboardFunc(handleKeypress);
     glutSpecialFunc(missileKeypress);
-    //glutMouseFunc(handleMouse);
+    glutMouseFunc(handleMouse);
     //glutTimerFunc(100, update, 0);
     glutMainLoop();
     return 0;
