@@ -187,6 +187,7 @@ void display() {
         glVertex2f(25,25);
 
         glVertex2f(5,25);
+        glVertex2f(3,23.5);
         glVertex2f(1,22);
         glVertex2f(5,20);
         glEnd();
@@ -199,6 +200,22 @@ void display() {
         glVertex2f(25,25);
         glEnd();
         //Aeroplane -- wing
+        //wing 1
+        glBegin(GL_POLYGON);
+        glColor3f(1.0f, 0.0f, 0.0f);
+        glVertex2f(20,25);
+        glVertex2f(23,30);
+        glVertex2f(20,30);
+        glVertex2f(10,25);
+        glEnd();
+        //wing 2
+        glBegin(GL_POLYGON);
+        glColor3f(1.0f, 0.0f, 0.0f);
+        glVertex2f(10,22);
+        glVertex2f(21,13);
+        glVertex2f(23,13);
+        glVertex2f(20,22);
+        glEnd();
     glPopMatrix();
 
     glFlush();
@@ -224,7 +241,7 @@ int main(int argc, char** argv) {
     int y = 100;
     glutInitWindowPosition(x, y);
 
-    glutCreateWindow("Basic Animation");
+    glutCreateWindow("Air-Strike");
     glutDisplayFunc(display);
     glutReshapeFunc(reshape);
     init();
