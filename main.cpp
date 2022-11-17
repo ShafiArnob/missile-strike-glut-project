@@ -170,8 +170,21 @@ void display() {
         glBegin(GL_POLYGON);
         glColor3f(1.0f, 0.0f, 0.0f);
         glVertex2f(-50,-50);
-        glVertex2f(-52.5,-45);
+        glVertex2f(-52.5,-42);
         glVertex2f(-55,-50);
+        glEnd();
+        //missile -- fins
+        glBegin(GL_POLYGON);
+        glColor3f(1.0f, 0.0f, 0.0f);
+        glVertex2f(-47,-80);
+        glVertex2f(-50,-70);
+        glVertex2f(-50,-80);
+        glEnd();
+        glBegin(GL_POLYGON);
+        glColor3f(1.0f, 0.0f, 0.0f);
+        glVertex2f(-55,-80);
+        glVertex2f(-55,-70);
+        glVertex2f(-58,-80);
         glEnd();
     glPopMatrix();
 
