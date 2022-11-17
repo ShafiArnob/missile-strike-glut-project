@@ -154,7 +154,7 @@ void display() {
     glEnd();
 
     //mountain
-    /*glBegin(GL_POLYGON);
+    glBegin(GL_POLYGON);
     glColor3f(1.0f, 0.5f, 0.0f);
     glVertex2f(20,-80);
     glVertex2f(0,-60);
@@ -170,7 +170,7 @@ void display() {
     glVertex2f(-65,-35);
     glVertex2f(-80,-45);
     glVertex2f(-80,-80);
-    glEnd();*/
+    glEnd();
     ///Silo
     glBegin(GL_POLYGON);
     glColor3f(1.0f, 1.0f, 1.0f);
