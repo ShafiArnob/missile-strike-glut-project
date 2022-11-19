@@ -278,6 +278,7 @@ void display() {
     glFlush();
 
 }
+
 void reshape(int w, int h){
     glViewport(0, 0, (GLsizei)w, (GLsizei)h);
     glMatrixMode(GL_PROJECTION);
@@ -286,6 +287,7 @@ void reshape(int w, int h){
     gluOrtho2D(-ortho,ortho,-ortho,ortho);
     glMatrixMode(GL_MODELVIEW);
 }
+
 int main(int argc, char** argv) {
     glutInit(&argc, argv);
     glutInitDisplayMode(GLUT_SINGLE|GLUT_RGB);
